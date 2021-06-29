@@ -1,0 +1,148 @@
+body {
+    scroll-behavior: smooth
+}
+
+
+/*INDEX*/
+
+section {
+    margin: 15px;
+    position: relative;
+    padding: 100px 0;
+}
+
+section h2,
+form h1 {
+    text-align: center;
+    color: #29ca8e;
+}
+
+p {
+    color: #757575;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 24px;
+    text-align: center;
+}
+
+section label {
+    font-family: 'Muli', sans-serif;
+    font-weight: bold;
+    line-height: inherit;
+}
+
+section {
+    display: block;
+}
+
+.navbar-expand-lg {
+    background: #ffffff;
+    border-top: 5px solid #29ca8e;
+    border-bottom: 0;
+    -webkit-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+    padding: 15px 0;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.navbar-expand-lg .navbar-brand {
+    color: #454545;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 40px;
+}
+
+.navbar-expand-lg .navbar-nav>li>a:hover,
+.navbar-expand-lg .navbar-nav>li>a:focus {
+    background-color: transparent;
+}
+
+.navbar-expand-lg .navbar-nav li a:hover {
+    background-color: #29ca8e;
+    color: #ffffff;
+}
+
+.navbar-expand-lg .navbar-nav li.active>a {
+    background-color: #29ca8e;
+    color: #ffffff;
+}
+
+.submit-btn,
+#login_btn,
+#create_btn,
+#details_btn,
+#back {
+    border-color: #04AA6D;
+    color: green;
+}
+
+.submit-btn:hover,
+#login_btn:hover,
+#create_btn:hover,
+#details_btn:hover,
+#back:hover {
+    background-color: #04AA6D;
+    color: white;
+}
+
+.form-group {
+    max-width: 1000px;
+    margin: auto;
+    padding: 10px 0;
+}
+
+img {
+    width: 100%;
+    text-align: center;
+}
+
+.feature-thumb {
+    border: 1px solid #f0f0f0;
+    padding: 5em 3em;
+}
+
+.feature-thumb span {
+    background: lightcoral;
+    border-radius: 50px;
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: bold;
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.feature-thumb h3 {
+    margin: 10px 0;
+}
+
+#zoom {
+    transition: transform .2s;
+}
+
+#zoom:hover {
+    -ms-transform: scale(1.1);
+    /* IE 9 */
+    -webkit-transform: scale(1.1);
+    /* Safari 3-8 */
+    transform: scale(1.1);
+}
+
+.hideable {
+    visibility: hidden;
+}
+
+#login,
+#registration {
+    margin-top: 55px;
+}
+
+#login_style {
+    border: 2px solid #f0f0f0;
+    padding: 2em 7em;
+}
