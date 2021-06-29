@@ -30,7 +30,7 @@ if (isset($_POST['create'])) {
     include("menu.html");
     ?>
     <div>
-        <form action="registration.php" method="post" id="registration">
+        <form action="login.php" method="post" id="registration">
             <div class="container">
                 <h1> Registrarse </h1>
                 <p> Llena el siguiente formulario </p>
@@ -65,7 +65,7 @@ if (isset($_POST['create'])) {
                 </div>
 
                 <div class="form-group col-md-4 ">
-                    <a href="index.php"><button type="button" class="form-control" id="back">Volver a la página principal</button></a>
+                    <a href="login.html"><button type="button" class="form-control" id="back">Volver a la página principal</button></a>
                 </div>
 
             </div>
