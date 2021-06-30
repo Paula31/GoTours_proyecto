@@ -1,73 +1,80 @@
+<?php
+
+include 'coneccion.php';
+
+$estancia = (int)$_POST['estancia'];
+$transporte = (int)$_POST['transporte'];
+$precio = (int)$_POST['precio'];
+
+$p = probabilidades_atributos($estancia, $transporte, $precio, $connection);
+//echo $p;
+
+$paquete = traer_paquete($estancia, $transporte, $precio, $p, $connection);
+echo 'paquete';
+echo $paquete[0];
+$actividades = obtener_actividades($paquete[0], $connection);
+
+$num = count($actividades);
+for ($i = 0; $i < $num; $i++) {
+  $j = 0;
+  $a = array_pop($actividades);
+  foreach ($a as $v) {
+    $actividad_temp[$j] = $v;
+    echo "Valor actual de \$a: $v.\n-j:";
+    echo $j;
+    $j++;
+  }
+}
+?>
+<script language="javascript">
+  agregar_paquete(<?php echo $actividad_temp[0], $actividad_temp[1],
+                  $actividad_temp[2], $actividad_temp[3], $actividad_temp[4]; ?>);
+</script>
+
+
 <!DOCTYPE html>
 <html lang="en">
+<script language="javascript">
+  function agregar_paquete(dia_actividad, nombre_actividad,
+    provincia_actividad, tipo_actividad, imagen_actividad) {
+    var elemento = '<div class="col-md-4 col-sm-4"><div class="feature-thumb"><div id="zoom"><span>' + dia_actividad + '</span><h3>' + nombre_actividad + '</h3><p>Provincia: ' + provincia_actividad + '</p><div class="form-group col-md-6"><button type="button" id="details_btn" class="form-control" data-bs-toggle="modal" data-bs-target="#exampleModal">Detalles</button></div><img src="' + imagen_actividad + '"></div></div></div>';
+    $('#alajuela').appendTo(elemento);
+
+  }
+</script>
+
+<script>
+  $("#agregar").click(function() {
+
+    var elemento = '<div class="flex-item" style="padding:6px;"><span class="icon-bell"></span><span class="count">1</span></div>';
+
+    $("#contenedor").append(elemento);
+
+  });
+</script>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-    <?php
-    include("menu.html");
-    ?>
+  <?php
+  include("menu.html");
+  ?>
 
-<section id="results">
+  <section id="results">
     <h2 id="title">Lista de paquetes vacaciones</h2>
 
     <p>A continución se muestran los paquetes según lo filtrado</p>
-    <div class="container" id="alajuela">
-      <div class="row">
-        <div class="col-md-4 col-sm-4">
-          <div class="feature-thumb">
-            <div id="zoom">
-              <span>01</span>
-              <h3>Volcán Arenal</h3>
-              <p>Conocido por sus fuentes termales, el activo volcán Arenal y su vida silvestre, con jaguares y ranas de árbol. El camino Las Coladas atraviesa el bosque hasta llegar a un campo de lava congelada.</p>
-              <div class="form-group col-md-6">
-                <button type="button" id="details_btn" class="form-control" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  Detalles
-                </button>
-              </div>
-              <iframe width="265" height="315" src="https://www.youtube.com/embed/gUqesOadTAo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
+    <div class="container">
+      <div class="row" id="alajuela">
 
-        <div class="col-md-4 col-sm-4">
-          <div class="feature-thumb">
-            <div id="zoom">
-              <span>02</span>
-              <h3>Mistico Arenal Hanging Bridges Park</h3>
-              <p>Frondosa reserva natural con numerosas excursiones de aventura, puentes colgantes y un pintoresco lago.</p>
-              <div class="form-group col-md-6">
-                <button type="button" id="details_btn" class="form-control" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                  Detalles
-                </button>
-              </div>
-              <iframe width="265" height="315" src="https://www.youtube.com/embed/yN-_QU6TEBk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 col-sm-4">
-          <div class="feature-thumb">
-            <div id="zoom">
-              <span>03</span>
-              <h3>La mano del Arenal</h3>
-              <p>#LaManoDelArenal es un punto exclusivo de Costa Rica y de Arenal con vistas increíbles del Lago Arenal. Una foto que hay que tener dentro de los destinos tan aclamados de Costa Rica.</p>
-              <div class="form-group col-md-6">
-                <button type="button" id="details_btn" class="form-control" data-bs-toggle="modal" data-bs-target="#exampleModal3">
-                  Detalles
-                </button>
-              </div>
-              <iframe width="265" height="315" src="https://www.youtube.com/embed/bxsQ33eYSog" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
       </div>
+    </div>
   </section>
 
   <!-- Modal -->
