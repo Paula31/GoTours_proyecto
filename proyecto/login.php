@@ -13,42 +13,11 @@
 </head>
 
 <body>
-
+    </div>
     <?php
     include 'menu.html';
     ?>
-
-    <div>
-        <?php
-
-        if (isset($_POST['login'])) {
-
-            include 'config.php';
-
-            $nombre = $_POST['nombre'];
-            $contraseña = $_POST['contraseña'];
-
-            $query = "SELECT name, password FROM proyecto_expertosb78959.user";
-
-            if ($stmt = $con->prepare($query)) {
-                $stmt->execute();
-                $stmt->bind_result($nombre_bd, $contraseña_bd);
-                while ($stmt->fetch()) {
-
-                    if ($nombre == $nombre_bd && $contraseña == $contraseña_bd) {
-                        printf("%s, %s\n", $nombre_bd, $contraseña_bd);
-                        echo 'inicio de sesión finalizado con éxito';
-                        exit();
-                    }
-                }
-                $stmt->close();
-            }
-        }
-
-        ?>
-    </div>
-
-    <form action="index.php" method="post" id="login" class="login">
+    <form action="login_process.php" method="post" id="login" class="login">
         <div class="container" id="login_style">
             <h1> Inicio de Sesión </h1>
             <p> Llena el siguiente formulario </p>
@@ -65,7 +34,7 @@
             </div>
 
             <div class="form-group col-md-4 ">
-                <a href="index.php"><button type="button" class="form-control" id="back">Volver a la página principal</button></a>
+                <a href="index.html"><button type="button" class="form-control" id="back">Volver a la página principal</button></a>
             </div>
         </div>
     </form>
